@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, flash, redirect
+from flask import Flask, request, jsonify, flash , redirect
 from deepface import DeepFace
 import os
 from dotenv import load_dotenv
