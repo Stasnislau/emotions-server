@@ -26,5 +26,4 @@ def analyze():
 if __name__ == '__main__':
     host = os.getenv('DOMAIN', 'localhost')
     port = int(os.getenv('PORT', 3001))
-    print(app.url_map)
     app.run(host=host, port=port)
