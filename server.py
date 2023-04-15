@@ -10,11 +10,18 @@ CORS(app)
 
 @app.route('/api/upload', methods=['POST'])
 def analyze():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image file in request'})
+    
     file = request.files['image']
     file.save('image.png')
-    [result] = DeepFace.analyze('image.png', enforce_detection=False)
-    dominant_emotion = result['dominant_emotion']
-    return jsonify({'mood': dominant_emotion})
+    
+    try:
+        result = DeepFace.analyze('image.png', enforce_detection=False)
+        dominant_emotion = result['dominant_emotion']
+        return jsonify({'mood': dominant_emotion})
+    except ValueError as e:
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     host = os.getenv('DOMAIN', 'localhost')
