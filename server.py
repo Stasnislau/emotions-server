@@ -18,7 +18,7 @@ def analyze():
     
     try:
         result = DeepFace.analyze('image.png', enforce_detection=False)
-        dominant_emotion = result['dominant_emotion']
+        dominant_emotion = result[0]['dominant_emotion']
         return jsonify({'mood': dominant_emotion})
     except ValueError as e:
         return jsonify({'error': str(e)})
